@@ -1,0 +1,113 @@
+\documentclass[a4paper]{article}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{float}
+\DeclareGraphicsExtensions{.eps,.ps,.jpg,.bmp}
+\usepackage{xcolor}
+%\setlength{\parskip}{0.5\baselineskip}
+\geometry{left=3.0cm,right=2.0cm,top=1.0cm,bottom=2.0cm} 
+\title{\textbf{Algorithmn HW3}}
+\author{5140379032 JIN YI FAN}
+\date{}
+\begin{document}
+\maketitle
+\begin{spacing}{1.3}
+%\begin{multicols}{2}
+
+\section*{Problem 1.38}
+\begin{algorithmic}[1]
+\Require set of $n$ positive integers $S$ 
+\Ensure two subsets $S_1$, $S_2$ with maximum sum difference
+\State $QuickSort(S[])$
+\State $S_1 \gets S[0:n/2+1]$
+\State $S_2 \gets S[n/2+1:n]$
+\State \textbf{return} $S_1$, $S_2$
+\end{algorithmic}
+The time complexity is $O(n\log n)$
+
+\section*{Problem 1.39}
+\begin{algorithmic}[1]
+\Require set of $n$ positive integers $S$ 
+\Ensure two subsets $S_1$, $S_2$ with minimum sum difference
+\Function{next\_perm}{$A[]$}
+\State {count the next permutation of elements in $A[]$}
+\State \textbf{return} an array containing this permutation.
+\EndFunction
+\State $dif\gets Max\_int$
+\State $whole \gets sum(S[])$
+\While{$next_Perm$ exists}
+\State $S[]\gets$ \Call{next\_Perm}{$S[]$}
+\State $tempDif\gets (whole-2sum(S[0:n/2]))$
+\If{$tempDif<dif$}
+\State $dif\gets tempDif$
+\State $Candidiate\gets S[]$
+\EndIf
+\EndWhile
+\State $S_1 \gets Candidate[0:n/2]$
+\State $S_2 \gets Candidate[n/2+1:n]$
+\State \textbf{return} $S_1$, $S_2$
+\end{algorithmic}
+The time complexity is $O(n^2\cdot sum)$
+
+\section*{Problem 5.4}
+\begin{algorithmic}[1]
+\Require an array with $n$ real numbers $A[1\ldots n]$ 
+\Ensure the average number 
+\Function{ave}{$A[],k$}
+\If{$k$ is $1$}
+\State \textbf{return} $A[0]$
+\Else
+\State $res\gets$ (\Call{ave}{$A[],k-1$}$*(k-1)+A[k]$)/$k$
+\State \textbf{return} $res$
+\EndIf
+\EndFunction
+\State \textbf{return} \Call{ave}{$A[],n$}
+\end{algorithmic}
+
+\section*{Problem 5.7}
+(a) 4567, 2463, 6523, 7461, 4251, 3241, 6491, 7563
+\begin{multicols}{4}
+\\\noindent \textbf{Step 1:} {\\1:7461,4251,3241\\2:6492\\3:2463,6523,7563\\7:4567}\\
+\\\textbf{Step 2:} {\\2:6523\\4:3241\\5:4251\\6:7461,2463,7563,4567\\9:6492}
+\\\textbf{Step 3:} {\\2:3241,4251\\4:7461,2463,6492\\5:6523,7563,4567}\\\\
+\\\textbf{Step 4:} {\\2:2463\\3:3241\\4:4251,4567\\6:6492,6523\\7:7461,7563}
+\end{multicols}
+\\\noindent (b) 16543, 25895, 18674, 98256, 91428, 73234, 16597, 73195
+\begin{multicols}{5}
+\\\noindent \textbf{Step 1:} {\\3:16543\\4:18674,73234\\5:25895,73195\\6:98256\\7:16597\\8:91428}
+\\\textbf{Step 2:} {\\2:91428\\3:73234\\4:16543\\5:98256\\8:18674\\9:25895,73195,16597}
+\\\textbf{Step 3:} {\\1:73195\\2:73234,98256\\4:91428\\5:16543,16597,18674\\8:25895}\\
+\\\textbf{Step 4:} {\\1:91428\\3:73195,73234\\5:25895\\6:16543,16597\\8:98256,18674}\\
+\\\textbf{Step 5:} {\\1:16543,16597,18674\\2:25895\\7:73195,73234\\9:91428,98256}\\
+\end{multicols}
+
+\section*{Sorting variable-length items}
+\begin{algorithmic}[1]
+\Require $L[]$ containing $n$ ints in $range[0:n^3-1]$
+\Ensure Sorted array within $O(n)$ time
+\State $k\gets \lfloor \log_{n}(n^3-1)\rfloor$
+\For{$unit\gets 1$ to $k$}
+\State Prepare $n$ empty list $L_0,L_1,\cdots ,L_9$
+\While{$A[]$ isn't empty}
+\State $temp\gets L.first$
+\State remove $L.first$ in $L$
+\State $i\gets$ the $unit^{th}$ number of $temp$
+\State $L_i.insert(temp)$
+\EndWhile
+\For{$i\gets 0$ to $9$}
+\State $L.append(L_i)$
+\EndFor
+\EndFor
+\State \textbf{return} $L$
+\end{algorithmic}
+
+%\end{multicols}
+\end{spacing}
+\end{document}

@@ -1,0 +1,40 @@
+\documentclass[a4paper]{article}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{float}
+\DeclareGraphicsExtensions{.eps,.ps,.jpg,.bmp}
+\usepackage{xcolor}
+%\setlength{\parskip}{0.5\baselineskip}
+\geometry{left=2.5cm,right=2.5cm,top=1.5cm,bottom=2.0cm} 
+\title{\textbf{Algorithmn HW12}}
+\author{5140379032 JIN YI FAN}
+\date{}
+\begin{document}
+\maketitle
+\begin{spacing}{1.3}
+%\begin{multicols}{2}
+\section*{Problem 18.12}
+There must exists 
+\\1) the first vertex $p_i$ s.t. $p_{i-1}\rightarrow p_i\rightarrow p$ is left-rotated and $p_{i}\rightarrow p_{i+1}\rightarrow p$ is right-rotated
+\\2) the first vertex $p_j$ s.t. $p_{j-1}\rightarrow p_j\rightarrow p$ is right-rotated and $p_{j}\rightarrow p_{j+1}\rightarrow p$ is left-rotated
+\\which can be found in $O(\log n)$ time using bisection method, then just put $p$ in betwen  $p_i$ and $p_j$.
+
+\section*{Problem 18.17}
+set two points $P_0$ and $P_1$ as base line, then pick another point $P_k$, compute $\angle P_1 P_0 P_k$. Order all $P_k$ other than $P_0$ and $P_1$ by this angle. Then the simple polygon constructed is $P(P_0 P_1 P_{k_1} \ldots P_{k_{n-2}})$
+
+\section*{Problem 18.17}
+Problem 18.12 shows that union convex hull can be computed in $O(\log n)$ time.
+\\And we need $O(n)$ time of insertion for each vertex.
+\\So the total time will be $\sum\limits_{k=1}^{n}(k+\log k)\leq n^2=O(n^2)$.
+%\end{multicols}
+\end{spacing}
+\end{document}
+

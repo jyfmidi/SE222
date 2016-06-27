@@ -1,0 +1,97 @@
+\documentclass[a4paper]{article}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{float}
+\DeclareGraphicsExtensions{.eps,.ps,.jpg,.bmp}
+\usepackage{xcolor}
+%\setlength{\parskip}{0.5\baselineskip}
+\geometry{left=2.5cm,right=2.5cm,top=1.5cm,bottom=2.0cm} 
+\title{\textbf{Algorithmn HW10}}
+\author{5140379032 JIN YI FAN}
+\date{}
+\begin{document}
+\maketitle
+\begin{spacing}{1.3}
+%\begin{multicols}{2}
+\section*{Problem 10.3}
+\begin{algorithmic}[1]
+\Require a given undirected graph $G=(V,E)$
+\Ensure whether it can be 2-colored
+\Function{dfs}{v}
+\State mark $v$ visited
+\State $v.mark\gets (color\gets !color)$\Comment{mark neighbour vertexes with different colors}
+\For{each edge $(v,w)\in E$}
+\If{$w$ is marked unvisited} 
+\State \Call{dfs}{w}
+\State \textbf{return} $True$
+\Else \State \textbf{return} ($w.mark==v.mark?$) $False$ : $True$
+\EndIf
+\EndFor
+\EndFunction
+\State $color\gets 1$\Comment{main function}
+\State mark each vertex $v\in V$ unvisited
+\For{each vertex $v\in V$ marked unvisited}\Comment{start dfs}    
+\If{\Call{dfs}{v}==$False$}
+\State \textbf{return} $False$
+\EndIf
+\EndFor
+\State \textbf{return} $True$
+\end{algorithmic}
+
+\section*{Problem 10.5}
+\begin{algorithmic}[1]
+\Require a given undirected graph $G=(V,E)$ and the color inf. $C=\{ c_1\ldots c_v, c_w\ldots\}$
+\Ensure whether this can be a solution of coloring problem 
+\For{each $e(v,w)\in G.E$}
+\If{$c_v==c_w$}
+\State \textbf{return} $False$
+\EndIf
+\EndFor
+\State \textbf{return} $True$
+\end{algorithmic}
+
+\section*{Problem 10.9}
+Let $I_1$ be an instance of $Pi_1$ and $I_2$ be an instance of $Pi_2$
+\\$I_1\rightarrow_{poly} I_2$ needs $O(n^j)$ time and $I_2$ can be solved in $O(n^k)$ time.
+\\$\therefore$ $\Pi_2$ can be solved in $O(n^{jk})$ time
+
+\section*{Problem 10.19}
+No, because the complexity of KNAPSACK is not polynomial but psedu-polynomial.
+
+\section*{Problem 10.22}
+\textbf{1)} $NP=P \Rightarrow \exists \Pi \in NPC,\Pi \in P$
+\\$\because$ $NPC\subseteq NP$ and $NP=P$
+\\$\therefore$ $NPC\subseteq P$
+\\$\therefore$ $\exists \Pi \in NPC,\Pi \in P$\\
+\\\textbf{2)} $\exists \Pi \in NPC,\Pi \in P \Rightarrow NP=P$
+\\$\because$ $\Pi_1 \in NPC\Rightarrow \Pi_1 \in NP$
+\\$\therefore$ $\forall \Pi_2 \in NP,\Pi_2 \propto_{poly} \Pi_1$
+\\$\because$ $\Pi_1 \in P$
+\\$\therefore$ $\forall \Pi_2 \in NP,\Pi_2 \in P$
+\\$\therefore$ $NP=P$\\
+\\$\therefore$ $NP=P \Leftrightarrow \exists \Pi \in NPC,\Pi \in P$
+
+\section*{Optimazing Problem}
+search version solution: $S(G)$
+\\optimization version solution: $S(G,L)$
+\\The $S(G,L)$ just need to add an operation to find the edge with smallest weight, which can be found in polynomial time.
+
+\section*{Hitting Set Problem}
+Given a graph $G$, for each edge $e=(u,v)\in G.E$, create a set $S=\{ u,v\}$ and add $s$ to $H$.
+\\Then just prove $G$ has a vertex cover of size $b$
+\\$\therefore$ VERTEX COVER $\propto_{poly}$ HITTING SET
+\\$\because$ VERTEX COVER $\in NPC$
+\\$\therefore$ HITTING SET $\in NPC$
+
+%\end{multicols}
+\end{spacing}
+\end{document}
+
